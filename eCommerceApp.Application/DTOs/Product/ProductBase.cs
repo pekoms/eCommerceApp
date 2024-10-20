@@ -1,19 +1,12 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-namespace eCommerceApp.Domain.Entities
+﻿namespace eCommerceApp.Application.DTOs.Product
 {
-    public class Product
+    public class ProductBase
     {
-        [Key]
-        public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public string? Image { get; set; }
         public int Quatity { get; set; }
-        public Category? Category { get; set; }
         public Guid CategoryId { get; set; }
-
     }
 }
