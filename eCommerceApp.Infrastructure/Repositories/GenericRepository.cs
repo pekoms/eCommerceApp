@@ -1,6 +1,7 @@
 ﻿using eCommerceApp.Application.Exceptions;
 using eCommerceApp.Domain.Interfaces;
 using eCommerceApp.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace eCommerceApp.Infrastructure.Repositories
@@ -22,19 +23,22 @@ namespace eCommerceApp.Infrastructure.Repositories
             return await context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+           return await context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
-        public Task<TEntity> GetByIdAsync()
+        public async Task<TEntity> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await context.Set<TEntity>().FindAsync(id);
+            return result;
+
         }
 
-        public Task<int> UpdateAsync(TEntity entity)
+        public async Task<int> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            context.Set<TEntity>().Update(entity);
+            return await context.SaveChangesAsync();
         }
     }
 }
